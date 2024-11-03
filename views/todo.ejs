@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>todo</title>
+	<link rel="stylesheet" type="text/css" href="/css/todo.css">
+</head>
+<body>
+	<h1><%=name%></h1>
+	<img src="<%=avtar%>">
+	<form action="/todo/add" method="post">
+		<input type="text" name="label">
+		<button type="submit">add</button>
+	</form>
+<form action="/user/logout" method="post">
+	<button type="submit">Log Out</button>
+</form>
+<% allTodo.forEach((todo)=>{%>
+
+<% if(todo.isDone==1){%>
+
+
+<%}%>
+
+<%})%>
+
+
+
+
+
+
+<% allTodo.forEach((todo)=>{%>
+<% if(todo.isDone==1){%>
+<s><%=todo.label%></s>
+<form action="todo/isDone/<%=todo.id%>" method="post">
+	<input type="checkBox" name="isDone" value="done" checked>
+</form>
+<form action="/todo/delete/<%=todo.id%>" method="post">
+	<button type="submit">delete</button>
+</form>
+<%}
+else{%>
+<p><%=todo.label%></p>
+<form action="todo/isDone/<%=todo.id%>" method="post">
+	<input type="checkBox" name="isDone" value="done">
+</form>
+<form action="/todo/delete/<%=todo.id%>" method="post">
+	<button type="submit">delete</button>
+</form>
+<%}
+
+%>
+
+
+
+
+<%})%>
+
+</body>
+<script type="text/javascript">
+	
+	document.querySelectorAll("input[type='checkBox']").forEach((check)=>{
+
+		check.addEventListener("change",(e)=>{
+		e.preventDefault()
+			e.target.parentElement.submit()
+		
+	})
+
+	})
+</script>
+</html>
